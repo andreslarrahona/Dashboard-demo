@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard de Certificados</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container">
+        <a class="navbar-brand" href="#">Dashboard de Certificados</a>
+      </div>
+    </nav>
+
+    <div class="container mt-4">
+      
+      <!-- Filtro de búsqueda -->
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <input v-model="filtro" class="form-control" placeholder="🔍 Buscar instrumento...">
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Tabla de Instrumentos -->
+        <div class="col-lg-8 col-md-12">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">📡 Instrumentos Registrados</h5>
+              <div class="table-responsive">
+                <table class="table table-hover">
+                  <thead class="table-dark">
+                    <tr>
+                      <th>ID</th>
+                      <th>Nombre</th>
+                      <th>Modelo</th>
+                      <th>Fecha</th>
+                      <th>Acción</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="instrumento in instrumentosFiltrados" :key="instrumento.id">
+                      <td>{{ instrumento.id }}</td>
+                      <td>{{ instrumento.nombre }}</td>
+                      <td>{{ instrumento.modelo }}</td>
+                      <td>{{ formatoFecha(instrumento.fecha) }}</td>
+                      <td>
+                        <button class="btn btn-primary btn-sm" @click="verCertificados(instrumento.id)">
+                          📄 Ver
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel de Certificados -->
+        <div class="col-lg-4 col-md-12">
+          <div v-if="certificados.length" class="card">
+            <div class="card-body">
+              <h5 class="card-title">✅ Certificados Asociados</h5>
+              <ul class="list-group">
+                <li v-for="certificado in certificados" :key="certificado.id" class="list-group-item d-flex justify-content-between align-items-center certificado-item">
+                  <span>{{ certificado.nombre }}</span>
+                  <span class="badge bg-success">{{ formatoFecha(certificado.fecha) }}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div v-else-if="cargandoCertificados" class="text-center mt-3">
+            ⏳ Cargando certificados...
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/vue@3.2.47/dist/vue.global.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/luxon/3.4.3/luxon.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
