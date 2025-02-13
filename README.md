@@ -1,3 +1,6 @@
 # Dashboard de certificados
-Desarrollado en HTML, CSS + Bootstrap, JavaScript + Vue.js
+## User dashboard
+
+Developed by Andrés Larrahona with HTML, CSS, Bootstrap, Vue.js
+
 ## https://andreslarrahona.github.io/dashboard-demo/
