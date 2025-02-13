@@ -3,4 +3,4 @@
 
 Developed by Andrés Larrahona with HTML, CSS, Bootstrap, Vue.js
 
-## https://andreslarrahona.github.io/dashboard-demo/
+## https://github.com/andreslarrahona/Dashboard-demo.git
